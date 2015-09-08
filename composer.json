@@ -1,0 +1,23 @@
+{
+    "name": "linkorb/projex",
+    "description": "Simplify management of your local project directories",
+    "homepage": "https://github.com/linkorb/projex",
+    "keywords": ["projex", "git", "project-manager", "linkorb"],
+    "type": "application",
+    "authors": [
+        {
+            "name": "LinkORB",
+            "email": "engineering@linkorb.com",
+            "role": "Development"
+        }
+    ],
+    "require": {
+        "symfony/console": "~2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Projex\\": "src/"
+        }
+    },
+    "license": "MIT"
+}
