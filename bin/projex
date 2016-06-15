@@ -24,4 +24,5 @@ $application = new Application('Projex', '0.0.1');
 $application->setCatchExceptions(true);
 $application->add(new \Projex\Command\ProjectsScanCommand());
 $application->add(new \Projex\Command\AtomUpdateCommand());
+$application->add(new \Projex\Command\GitFetchCommand());
 $application->run();
