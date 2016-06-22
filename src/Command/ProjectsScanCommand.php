@@ -37,13 +37,13 @@ class ProjectsScanCommand extends Command
         } else {
             $path = getenv("HOME").'/git';
         }
-        $output->write("Projex: Scanning projects (path = $path)\n");
+        $output->writeln("<comment>Projex: Scanning projects (path = <info>$path</info>)</comment>");
         $scanner = new Scanner();
         $projects = $scanner->scan($path);
 
         foreach ($projects as $project) {
-            $output->write(" * " . $project->getPath() . "\n");
+            $output->writeln('<info> * </info>'.$project->getPath());
         }
-        $output->write("Found " . count($projects) . " projects\n");
+        $output->writeln('Found <info>'.count($projects).'</info> projects.');
     }
 }
