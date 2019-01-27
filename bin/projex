@@ -3,6 +3,8 @@
 
 date_default_timezone_set('UTC');
 
+use Symfony\Component\Dotenv\Dotenv;
+
 $filename = __DIR__ . '/../vendor/autoload.php';
 if (!file_exists($filename)) {
     $filename = __DIR__ . '/../../../autoload.php';
@@ -16,13 +18,37 @@ if (!file_exists($filename)) {
     );
 }
 
+
 $loader = require $filename;
+
+
+$filename = '.env';
+if (file_exists($filename)) {
+    $dotenv = new Dotenv();
+    $dotenv->load($filename);
+}
+
+$gitPath = getenv('PROJEX_GIT_PATH');
+$dataPath = getenv('PROJEX_DATA_PATH');
+
+if (!$gitPath || !file_exists($gitPath)) {
+    throw new RuntimeException("PROJEX_GIT_PATH configured incorrectly");
+}
+if (!$dataPath || !file_exists($dataPath)) {
+    throw new RuntimeException("PROJEX_DATA_PATH configured incorrectly");
+}
+if ($dataPath==$gitPath) {
+    throw new RuntimeException("PROJEX_DATA_PATH  and PROJEX_GIT_PATH should not be the same");
+}
+
+
 
 use Symfony\Component\Console\Application;
 
 $application = new Application('Projex', '0.0.1');
 $application->setCatchExceptions(true);
-$application->add(new \Projex\Command\ProjectsScanCommand());
+$application->add(new \Projex\Command\ScanCommand());
+$application->add(new \Projex\Command\DirtyCommand());
+$application->add(new \Projex\Command\FetchCommand());
 $application->add(new \Projex\Command\AtomUpdateCommand());
-$application->add(new \Projex\Command\GitFetchCommand());
 $application->run();

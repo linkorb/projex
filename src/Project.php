@@ -42,4 +42,38 @@ class Project
         $this->path = $path;
         return $this;
     }
+
+    private $head;
+    
+    public function getHead()
+    {
+        return $this->head;
+    }
+    
+    public function setHead($head)
+    {
+        $this->head = $head;
+        return $this;
+    }
+
+    private $status;
+    
+    public function getStatus()
+    {
+        return $this->status;
+    }
+    
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    public function isDirty()
+    {
+        if (trim($this->status)=='') {
+            return false;
+        }
+        return true;
+    }
 }

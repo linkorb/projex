@@ -2,7 +2,7 @@
 
 namespace Projex\Exporter;
 
-class AtomProjectsCsonExporter
+class AtomProjectViewerCsonExporter
 {
     public function export($projects)
     {
